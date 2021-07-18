@@ -1,0 +1,5 @@
+Develpment plan
+
+1) Develpe the frontend
+
+2) Develpe the backend(cms)
