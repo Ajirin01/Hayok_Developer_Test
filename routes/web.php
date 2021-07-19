@@ -14,9 +14,12 @@
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-
+ 
 Route::get('/', function () {
     return view('dashboard');
 });
 
+Route::resource('doctors', 'DoctorsController');
+Route::resource('patients', 'PatientsController');
+Route::resource('chats', 'ChatsController');
 
