@@ -12,6 +12,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/font-awesome.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+    <script src="{{ asset('assets/js/webcam-easy.js') }}"></script>
+
     <!--[if lt IE 9]>
 		<script src="{{ asset('assets/js/html5shiv.min.js') }}"></script>
 		<script src="{{ asset('assets/js/respond.min.js') }}"></script>
@@ -22,7 +24,7 @@
     <div class="main-wrapper">
         <div class="header">
 			<div class="header-left">
-				<a href="index-2.html" class="logo">
+				<a href="/" class="logo">
 					<img src="{{ asset('assets/img/logo.png') }}" width="35" height="35" alt=""> <span>Hayok</span>
 				</a>
 			</div>
@@ -136,13 +138,13 @@
                     <ul>
                         <li class="menu-title">Main</li>
                         <li class="active">
-                            <a href="index-2.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                            <a href="/"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 						<li>
-                            <a href="doctors.html"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
+                            <a href="{{ route('doctors.index') }}"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
                         </li>
                         <li>
-                            <a href="patients.html"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
+                            <a href="{{ route('patients.index') }}"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
                         </li>
                         <li>
                             <a href="appointments.html"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
@@ -390,6 +392,70 @@
     <script src="{{ asset('assets/js/Chart.bundle.js') }}"></script>
     <script src="{{ asset('assets/js/chart.js') }}"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}"></script>
+
+    <script>
+        $(function () {
+          $("#example1").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+          });
+          $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+          });
+          // Summernote
+          $('.textarea').summernote();
+        });
+      </script>
+      <script>
+        const webcamElement = document.getElementById('webcam');
+        const canvasElement = document.getElementById('canvas');
+        const snapSoundElement = document.getElementById('snapSound');
+        const webcam = new Webcam(webcamElement, 'user', canvasElement, snapSoundElement);
+
+        document.getElementById('take-photo').onclick = function(){
+            webcam.start()
+            .then(result =>{
+                console.log("webcam started");
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        }
+
+        document.getElementById('snap').onclick = function(){
+            event.preventDefault()
+            let picture = webcam.snap();
+            //console.log(picture)
+            document.getElementById('avarta').src = picture;
+            document.getElementById('patient-photo').value = picture;
+            // document.getElementById('image-url').
+        }
+        /*let picture = webcam.snap();
+        document.querySelector('#download-photo').href = picture;*/
+
+        document.getElementById('flip').onclick = function(){
+            event.preventDefault()
+                webcam.flip();
+                webcam.start();
+        }
+
+        document.getElementById('close').onclick = function(){
+            webcam.stop();
+        }
+
+        
+        
+
+        // export {default};
+        </script>
 
 </body>
 

@@ -254,7 +254,7 @@
                     </ul>
                 </div>
                 <div class="card-footer text-center bg-white">
-                    <a href="doctors.html" class="text-muted">View all Doctors</a>
+                    <a href="{{ route('doctors.index') }}" class="text-muted">View all Doctors</a>
                 </div>
             </div>
         </div>
